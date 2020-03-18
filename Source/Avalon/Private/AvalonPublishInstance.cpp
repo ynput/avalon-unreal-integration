@@ -73,7 +73,6 @@ void UAvalonPublishInstance::OnAssetRemoved(const FAssetData& AssetData)
 		if (assetFName != "AvalonPublishInstance")
 		{
 			// UE_LOG(LogTemp, Warning, TEXT("%s: asset removed"), *lpp);
-			FString assetPath = AssetData.GetFullName();
 			assets.Remove(assetPath);
 		}
 	}

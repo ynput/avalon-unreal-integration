@@ -1,7 +1,7 @@
 #include "AvalonLib.h"
 #include "Misc/Paths.h"
 #include "Misc/ConfigCacheIni.h"
-#include "UnrealType.h"
+#include "UObject/UnrealType.h"
 
 /**
  * Sets color on folder icon on given path
@@ -23,7 +23,7 @@ void UAvalonLib::CSetFolderColor(FString FolderPath, FLinearColor FolderColor, b
 	};
 
 	SaveColorInternal(FolderPath, FolderColor);
-	
+
 }
 /**
  * Returns all poperties on  given object
