@@ -14,12 +14,10 @@ public:
 private:
 
 	void AddMenuEntry(FMenuBuilder& MenuBuilder);
-	void FillSystemSubmenu(FMenuBuilder& MenuBuilder);
 	void MenuCreate();
 	void MenuLoad();
 	void MenuPublish();
 	void MenuManage();
 	void MenuWorkfiles();
-	void MenuProjectManager();
 
 };

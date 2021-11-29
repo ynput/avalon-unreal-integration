@@ -43,9 +43,3 @@ class AvalonIntegration(unreal.AvalonPythonBridge):
     def RunInPython_Workfiles(self):
         # not implemented yet
         unreal.log_warning("Avalon: showing workfiles window")
-
-    @unreal.ufunction(override=True)
-    def RunInPython_ProjectManager(self):
-        unreal.log_warning("Avalon: showing project manager window")
-        if avalon_detected:
-            avalon_unreal.show_project_manager()

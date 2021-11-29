@@ -70,24 +70,8 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 			FSlateIcon(),
 			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuWorkfiles))
 		);
-
-		MenuBuilder.AddSubMenu(FText::FromString("System"),
-			FText::FromString("System tools"),
-			FNewMenuDelegate::CreateRaw(this, &FAvalonModule::FillSystemSubmenu));
-
 	}
 	MenuBuilder.EndSection();
-}
-
-void FAvalonModule::FillSystemSubmenu(FMenuBuilder& MenuBuilder)
-{
-	// Create the Submenu Entries
-	MenuBuilder.AddMenuEntry(
-		FText::FromString("Project Manager ..."),
-		FText::FromString("Project Manager"),
-		FSlateIcon(),
-		FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuProjectManager))
-	);
 }
 
 
@@ -114,11 +98,6 @@ void FAvalonModule::MenuManage() {
 void FAvalonModule::MenuWorkfiles() {
 	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
 	bridge->RunInPython_Workfiles();
-}
-
-void FAvalonModule::MenuProjectManager() {
-	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_ProjectManager();
 }
 
 IMPLEMENT_MODULE(FAvalonModule, Avalon)
