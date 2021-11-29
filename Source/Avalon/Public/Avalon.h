@@ -18,5 +18,6 @@ private:
 	void MenuLoad();
 	void MenuPublish();
 	void MenuManage();
+	void MenuExperimentalTools();
 
 };

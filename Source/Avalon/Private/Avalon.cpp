@@ -10,7 +10,7 @@ static const FName AvalonTabName("Avalon");
 // This function is triggered when the plugin is staring up
 void FAvalonModule::StartupModule()
 {
-	
+
 	// Create the Extender that will add content to the menu
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	TSharedPtr<FExtender> MenuExtender = MakeShareable(new FExtender());
@@ -21,7 +21,7 @@ void FAvalonModule::StartupModule()
 		FMenuExtensionDelegate::CreateRaw(this, &FAvalonModule::AddMenuEntry)
 	);
 	LevelEditorModule.GetMenuExtensibilityManager()->AddExtender(MenuExtender);
-	
+
 }
 
 void FAvalonModule::ShutdownModule()
@@ -64,6 +64,13 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuManage))
 		);
 
+		MenuBuilder.AddMenuEntry(
+			FText::FromString("Experimental tools ..."),
+			FText::FromString("Experimental tools"),
+			FSlateIcon(),
+			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuExperimentalTools))
+		);
+
 	}
 	MenuBuilder.EndSection();
 }
@@ -87,6 +94,11 @@ void FAvalonModule::MenuPublish() {
 void FAvalonModule::MenuManage() {
 	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
 	bridge->RunInPython_Manage();
+}
+
+void FAvalonModule::MenuExperimentalTools() {
+	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
+	bridge->RunInPython_ExperimentalTools();
 }
 
 IMPLEMENT_MODULE(FAvalonModule, Avalon)

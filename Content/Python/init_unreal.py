@@ -38,3 +38,9 @@ class AvalonIntegration(unreal.AvalonPythonBridge):
         unreal.log_warning("Avalon: showing manager window")
         if avalon_detected:
             avalon_unreal.show_manager()
+
+    @unreal.ufunction(override=True)
+    def RunInPython_ExperimentalTools(self):
+        unreal.log_warning("Avalon: showing experimental tools dialog")
+        if avalon_detected:
+            avalon_unreal.show_experimental_tools()
