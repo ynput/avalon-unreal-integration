@@ -22,7 +22,4 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Python)
 		void RunInPython_Manage() const;
-
-	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_Workfiles() const;
 };

@@ -64,12 +64,6 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuManage))
 		);
 
-		MenuBuilder.AddMenuEntry(
-			FText::FromString("Workfiles ..."),
-			FText::FromString("Workfiles"),
-			FSlateIcon(),
-			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuWorkfiles))
-		);
 	}
 	MenuBuilder.EndSection();
 }
@@ -93,11 +87,6 @@ void FAvalonModule::MenuPublish() {
 void FAvalonModule::MenuManage() {
 	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
 	bridge->RunInPython_Manage();
-}
-
-void FAvalonModule::MenuWorkfiles() {
-	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_Workfiles();
 }
 
 IMPLEMENT_MODULE(FAvalonModule, Avalon)
