@@ -28,4 +28,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Python)
 		void RunInPython_ProjectManager() const;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = Python)
+		void RunInPython_Render() const;
 };

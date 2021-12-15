@@ -75,6 +75,13 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 			FText::FromString("System tools"),
 			FNewMenuDelegate::CreateRaw(this, &FAvalonModule::FillSystemSubmenu));
 
+		MenuBuilder.AddMenuEntry(
+			FText::FromString("Start Rendering ..."),
+			FText::FromString("Start Render"),
+			FSlateIcon(),
+			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuRender))
+		);
+
 	}
 	MenuBuilder.EndSection();
 }
@@ -119,6 +126,11 @@ void FAvalonModule::MenuWorkfiles() {
 void FAvalonModule::MenuProjectManager() {
 	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
 	bridge->RunInPython_ProjectManager();
+}
+
+void FAvalonModule::MenuRender() {
+	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
+	bridge->RunInPython_Render();
 }
 
 IMPLEMENT_MODULE(FAvalonModule, Avalon)

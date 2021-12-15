@@ -49,3 +49,9 @@ class AvalonIntegration(unreal.AvalonPythonBridge):
         unreal.log_warning("Avalon: showing project manager window")
         if avalon_detected:
             avalon_unreal.show_project_manager()
+
+    @unreal.ufunction(override=True)
+    def RunInPython_Render(self):
+        unreal.log_warning("Avalon: starting rendering")
+        if avalon_detected:
+            avalon_unreal.start_render()
