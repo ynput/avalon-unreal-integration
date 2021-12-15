@@ -21,5 +21,6 @@ private:
 	void MenuManage();
 	void MenuWorkfiles();
 	void MenuProjectManager();
+	void MenuRender();
 
 };
