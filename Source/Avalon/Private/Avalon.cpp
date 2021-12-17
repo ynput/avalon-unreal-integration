@@ -37,38 +37,17 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 	{
 		// Create a Submenu inside of the Section
 		MenuBuilder.AddMenuEntry(
-			FText::FromString("Create ..."),
-			FText::FromString("Avalon Creators"),
+			FText::FromString("Tools..."),
+			FText::FromString("Pipeline tools"),
 			FSlateIcon(),
-			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuCreate))
+			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuPopup))
 		);
 
 		MenuBuilder.AddMenuEntry(
-			FText::FromString("Load ..."),
-			FText::FromString("Avalon Loaders"),
+			FText::FromString("Tools dialog..."),
+			FText::FromString("Pipeline tools dialog"),
 			FSlateIcon(),
-			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuLoad))
-		);
-
-		MenuBuilder.AddMenuEntry(
-			FText::FromString("Publish ..."),
-			FText::FromString("Pyblish"),
-			FSlateIcon(),
-			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuPublish))
-		);
-
-		MenuBuilder.AddMenuEntry(
-			FText::FromString("Manage ..."),
-			FText::FromString("Manage scene"),
-			FSlateIcon(),
-			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuManage))
-		);
-
-		MenuBuilder.AddMenuEntry(
-			FText::FromString("Experimental tools ..."),
-			FText::FromString("Experimental tools"),
-			FSlateIcon(),
-			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuExperimentalTools))
+			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuDialog))
 		);
 
 	}
@@ -76,29 +55,14 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 }
 
 
-void FAvalonModule::MenuCreate() {
+void FAvalonModule::MenuPopup() {
 	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_Create();
+	bridge->RunInPython_Popup();
 }
 
-void FAvalonModule::MenuLoad() {
+void FAvalonModule::MenuDialog() {
 	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_Load();
-}
-
-void FAvalonModule::MenuPublish() {
-	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_Publish();
-}
-
-void FAvalonModule::MenuManage() {
-	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_Manage();
-}
-
-void FAvalonModule::MenuExperimentalTools() {
-	UAvalonPythonBridge* bridge = UAvalonPythonBridge::Get();
-	bridge->RunInPython_ExperimentalTools();
+	bridge->RunInPython_Dialog();
 }
 
 IMPLEMENT_MODULE(FAvalonModule, Avalon)
