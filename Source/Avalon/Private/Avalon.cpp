@@ -1,6 +1,7 @@
 #include "Avalon.h"
 #include "LevelEditor.h"
 #include "AvalonPythonBridge.h"
+#include "AvalonStyle.h"
 
 
 static const FName AvalonTabName("Avalon");
@@ -13,14 +14,25 @@ void FAvalonModule::StartupModule()
 
 	// Create the Extender that will add content to the menu
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
+	
 	TSharedPtr<FExtender> MenuExtender = MakeShareable(new FExtender());
+	TSharedPtr<FExtender> ToolbarExtender = MakeShareable(new FExtender());
+
 	MenuExtender->AddMenuExtension(
 		"LevelEditor",
 		EExtensionHook::After,
 		NULL,
 		FMenuExtensionDelegate::CreateRaw(this, &FAvalonModule::AddMenuEntry)
 	);
+	ToolbarExtender->AddToolBarExtension(
+		"Settings",
+		EExtensionHook::After,
+		NULL,
+		FToolBarExtensionDelegate::CreateRaw(this, &FAvalonModule::AddToobarEntry));
+
+
 	LevelEditorModule.GetMenuExtensibilityManager()->AddExtender(MenuExtender);
+	LevelEditorModule.GetToolBarExtensibilityManager()->AddExtender(ToolbarExtender);
 
 }
 
@@ -52,6 +64,21 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 
 	}
 	MenuBuilder.EndSection();
+}
+
+void FAvalonModule::AddToobarEntry(FToolBarBuilder& ToolbarBuilder)
+{
+	ToolbarBuilder.BeginSection(TEXT("Avalon"));
+	{
+		ToolbarBuilder.AddComboButton(
+			FUIAction(),
+			FOnGetContent::CreateRaw(this, &FAvalonModule::MenuDialog),
+			LOCTEXT("Avalon_label", "Avalon"),
+			LOCTEXT("Avalon_tooltip", "Avalon Tools"),
+			FSlateIcon(FAvalonStyle::GetStyleSetName(), "Avalon.Logo")
+		);
+	}
+	ToolbarBuilder.EndSection();
 }
 
 
