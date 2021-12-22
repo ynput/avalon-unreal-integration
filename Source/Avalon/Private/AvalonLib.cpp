@@ -35,9 +35,9 @@ TArray<FString> UAvalonLib::GetAllProperties(UClass* cls)
 	TArray<FString> Ret;
 	if (cls != nullptr)
 	{
-		for (TFieldIterator<UProperty> It(cls); It; ++It)
+		for (TFieldIterator<FProperty> It(cls); It; ++It)
 		{
-			UProperty* Property = *It;
+			FProperty* Property = *It;
 			if (Property->HasAnyPropertyFlags(EPropertyFlags::CPF_Edit))
 			{
 				Ret.Add(Property->GetName());

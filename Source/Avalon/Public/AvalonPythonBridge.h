@@ -12,20 +12,9 @@ public:
 		static UAvalonPythonBridge* Get();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_Create() const;
+		void RunInPython_Popup() const;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_Load() const;
+		void RunInPython_Dialog() const;
 
-	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_Publish() const;
-
-	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_Manage() const;
-
-	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_Workfiles() const;
-
-	UFUNCTION(BlueprintImplementableEvent, Category = Python)
-		void RunInPython_ProjectManager() const;
 };

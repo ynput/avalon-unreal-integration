@@ -10,16 +10,12 @@ class FAvalonModule : public IModuleInterface
 public:
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
-	
+
 private:
 
 	void AddMenuEntry(FMenuBuilder& MenuBuilder);
-	void FillSystemSubmenu(FMenuBuilder& MenuBuilder);
-	void MenuCreate();
-	void MenuLoad();
-	void MenuPublish();
-	void MenuManage();
-	void MenuWorkfiles();
-	void MenuProjectManager();
+	void AddToobarEntry(FToolBarBuilder& ToolbarBuilder);
+	void MenuPopup();
+	void MenuDialog();
 
 };
