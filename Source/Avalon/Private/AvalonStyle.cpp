@@ -32,13 +32,12 @@ FName FAvalonStyle::GetStyleSetName()
 
 FName FAvalonStyle::GetContextName()
 {
-	static FName ContextName(TEXT("Avalon"));
+	static FName ContextName(TEXT("OpenPype"));
 	return ContextName;
 }
 
-#define IMAGE_BRUSH( RelativePath, ... ) FSlateImageBrush( Style->RootToContentDir( RelativePath, TEXT(".png") ), __VA_ARGS__ )
+#define IMAGE_BRUSH(RelativePath, ...) FSlateImageBrush( Style->RootToContentDir( RelativePath, TEXT(".png") ), __VA_ARGS__ )
 
-const FVector2D Icon128x128(128.0f, 128.0f);
 const FVector2D Icon40x40(40.0f, 40.0f);
 
 TUniquePtr< FSlateStyleSet > FAvalonStyle::Create()
@@ -55,10 +54,8 @@ void FAvalonStyle::SetIcon(const FString& StyleName, const FString& ResourcePath
 
 	FString Name(GetContextName().ToString());
 	Name = Name + "." + StyleName;
-	Style->Set(*Name, new IMAGE_BRUSH(ResourcePath, Icon128x128));
+	Style->Set(*Name, new FSlateImageBrush(Style->RootToContentDir(ResourcePath, TEXT(".png")), Icon40x40));
 
-	Name += ".Small";
-	Style->Set(*Name, new IMAGE_BRUSH(ResourcePath, Icon40x40));
 
 	FSlateApplication::Get().GetRenderer()->ReloadTextureResources();
 }

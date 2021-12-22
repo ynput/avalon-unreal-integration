@@ -12,6 +12,9 @@ static const FName AvalonTabName("Avalon");
 void FAvalonModule::StartupModule()
 {
 
+	FAvalonStyle::Initialize();
+	FAvalonStyle::SetIcon("Logo", "openpype40");
+
 	// Create the Extender that will add content to the menu
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	
@@ -38,27 +41,27 @@ void FAvalonModule::StartupModule()
 
 void FAvalonModule::ShutdownModule()
 {
-
+	FAvalonStyle::Shutdown();
 }
 
 
 void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 {
 	// Create Section
-	MenuBuilder.BeginSection("Avalon", TAttribute<FText>(FText::FromString("Avalon")));
+	MenuBuilder.BeginSection("OpenPype", TAttribute<FText>(FText::FromString("OpenPype")));
 	{
 		// Create a Submenu inside of the Section
 		MenuBuilder.AddMenuEntry(
 			FText::FromString("Tools..."),
 			FText::FromString("Pipeline tools"),
-			FSlateIcon(),
+			FSlateIcon(FAvalonStyle::GetStyleSetName(), "OpenPype.Logo"),
 			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuPopup))
 		);
 
 		MenuBuilder.AddMenuEntry(
 			FText::FromString("Tools dialog..."),
 			FText::FromString("Pipeline tools dialog"),
-			FSlateIcon(),
+			FSlateIcon(FAvalonStyle::GetStyleSetName(), "OpenPype.Logo"),
 			FUIAction(FExecuteAction::CreateRaw(this, &FAvalonModule::MenuDialog))
 		);
 
@@ -68,14 +71,19 @@ void FAvalonModule::AddMenuEntry(FMenuBuilder& MenuBuilder)
 
 void FAvalonModule::AddToobarEntry(FToolBarBuilder& ToolbarBuilder)
 {
-	ToolbarBuilder.BeginSection(TEXT("Avalon"));
+	ToolbarBuilder.BeginSection(TEXT("OpenPype"));
 	{
-		ToolbarBuilder.AddComboButton(
-			FUIAction(),
-			FOnGetContent::CreateRaw(this, &FAvalonModule::MenuDialog),
-			LOCTEXT("Avalon_label", "Avalon"),
-			LOCTEXT("Avalon_tooltip", "Avalon Tools"),
-			FSlateIcon(FAvalonStyle::GetStyleSetName(), "Avalon.Logo")
+		ToolbarBuilder.AddToolBarButton(
+			FUIAction(
+				FExecuteAction::CreateRaw(this, &FAvalonModule::MenuPopup),
+				NULL,
+				FIsActionChecked()
+
+			),
+			NAME_None,
+			LOCTEXT("OpenPype_label", "OpenPype"),
+			LOCTEXT("OpenPype_tooltip", "OpenPype Tools"),
+			FSlateIcon(FAvalonStyle::GetStyleSetName(), "OpenPype.Logo")
 		);
 	}
 	ToolbarBuilder.EndSection();
