@@ -14,6 +14,7 @@ public:
 private:
 
 	void AddMenuEntry(FMenuBuilder& MenuBuilder);
+	void AddToobarEntry(FToolBarBuilder& ToolbarBuilder);
 	void MenuPopup();
 	void MenuDialog();
 
